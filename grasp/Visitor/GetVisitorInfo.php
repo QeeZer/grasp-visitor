@@ -22,31 +22,24 @@ class GetVisitorInfo implements GetVisitorInfoContract
 	{
 		$filesystem = new Filesystem();
 
-		try {
-			if(!$filesystem->exists($this->file)) {
-				throw new VisitorException($this->file . ' not exists. Please check it.');
-			}
-
-			$filesystem->chmod($this->file, 0755);
-
-			$filesystem->appendToFile($this->file, '------s' . $this->getReferer() . "s------\r\n");
-
-			foreach($info as $key => $item)
-			{
-				if(!method_exists($this, $item)) {
-					throw new VisitorException($item . 'method is not exists. Please check it.');
-				}
-
-				$filesystem->appendToFile($this->file, $key. ': ' . $this->$item() . "\r\n");
-			}
-
-			$filesystem->appendToFile($this->file, '------e' . $this->getReferer() . "e------\r\n\r\n");
-
-			return 'ok';
-
-		} catch (IOExceptionInterface $exception) {
-			echo "An error occurred while creating your directory at ".$exception->getPath();
+		if(!$filesystem->exists($this->file)) {
+			throw new VisitorException($this->file . ' not exists. Please check it.');
 		}
+
+		$filesystem->appendToFile($this->file, '------s' . $this->getReferer() . "s------\r\n");
+
+		foreach($info as $key => $item)
+		{
+			if(!method_exists($this, $item)) {
+				throw new VisitorException($item . 'method is not exists. Please check it.');
+			}
+
+			$filesystem->appendToFile($this->file, $key. ': ' . $this->$item() . "\r\n");
+		}
+
+		$filesystem->appendToFile($this->file, '------e' . $this->getReferer() . "e------\r\n\r\n");
+
+		return 'ok';
 	}
 
 	public function getRemoteAddr()

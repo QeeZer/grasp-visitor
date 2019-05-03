@@ -23,4 +23,4 @@ $gvi->saveVisitorInfo([
 	'ua' => 'getUserAgent'
 ]);
 
-redirect('http://blog.qz.ink');
+// redirect('http://blog.qz.ink');
