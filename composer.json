@@ -1,0 +1,17 @@
+{
+  "name": "qeezer/grasp-info",
+  "type": "project",
+  "require": {
+    "php": ">=7.2",
+    "illuminate/container": "5.5",
+    "symfony/filesystem": "^4.2"
+  },
+  "autoload": {
+    "files": [
+      "helpers.php"
+    ],
+    "psr-4": {
+      "Grasp\\": "grasp/"
+    }
+  }
+}
