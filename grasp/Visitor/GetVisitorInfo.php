@@ -24,7 +24,7 @@ class GetVisitorInfo implements GetVisitorInfoContract
 
 		try {
 			if(!$filesystem->exists($this->file)) {
-				throw new VisitorException($this->file . ' not exists. Please check it.');
+				$filesystem->touch($this->file);
 			}
 
 			$filesystem->chmod($this->file, 0755);
